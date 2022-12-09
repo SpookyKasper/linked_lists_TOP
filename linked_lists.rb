@@ -61,6 +61,40 @@ class LinkedList
     count
   end
 
+  def at(idx)
+    current_node = @head
+    until idx == 0
+      current_node = current_node.next_node
+      idx -= 1
+    end
+    current_node
+  end
+
+  # Algo pop method
+  # select last element
+  # select node poiting at last element
+  # that node points now to nil
+  # return the last element
+
+  def pop
+    aimed_node = @head
+    tail = @tail
+    until aimed_node.next_node == @tail
+      aimed_node = aimed_node.next_node
+    end
+    aimed_node.next_node = nil
+    tail
+  end
+
+  def contains(value)
+    result = false
+    current = @head
+    until current.next_node.nil?
+      current = current.next_node
+      result = true if current.value == value
+    end
+    result
+  end
 end
 
 class Node
@@ -80,11 +114,13 @@ my_list.append(35)
 my_list.append(64)
 my_list.append(387)
 my_list.prepend(43)
-p my_list
 
+puts "This is the head of the list #{my_list.head}"
+puts "This is the tail of the list #{my_list.tail}"
+
+puts my_list.at(3)
+p my_list.pop
 p my_list.size
-p my_empty_list.size
-
-
-
+p my_list.contains(35)
+p my_list.contains(2)
 
