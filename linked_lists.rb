@@ -70,12 +70,6 @@ class LinkedList
     current_node
   end
 
-  # Algo pop method
-  # select last element
-  # select node poiting at last element
-  # that node points now to nil
-  # return the last element
-
   def pop
     aimed_node = @head
     tail = @tail
@@ -90,8 +84,22 @@ class LinkedList
     result = false
     current = @head
     until current.next_node.nil?
-      current = current.next_node
       result = true if current.value == value
+      current = current.next_node
+    end
+    result
+  end
+
+  def find(value)
+    current = @head
+    result = nil
+    idx = 0
+    until current.next_node.nil?
+      if current.value == value
+        result = idx
+      end
+      current = current.next_node
+      idx += 1
     end
     result
   end
@@ -113,14 +121,12 @@ my_empty_list = LinkedList.new
 my_list.append(35)
 my_list.append(64)
 my_list.append(387)
+my_list.prepend(588)
 my_list.prepend(43)
 
-puts "This is the head of the list #{my_list.head}"
-puts "This is the tail of the list #{my_list.tail}"
+p my_list
 
-puts my_list.at(3)
-p my_list.pop
-p my_list.size
-p my_list.contains(35)
-p my_list.contains(2)
+p my_list.find(35)
+
+
 
