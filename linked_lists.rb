@@ -111,16 +111,38 @@ class LinkedList
       string += "(#{current_node.value.to_s}) -> "
       current_node = current_node.next_node
     end
-    string += 'nil'
+    string += "(#{current_node.value.to_s}) -> nil"
     string
+  end
+
+  #insert_at(value, index) that inserts a new node with the provided value at the given index.
+
+  # Given a value and an index:
+  # go through the list until just before the given index selecting the current node
+  # the current node 'next' is passed as the next of the new node
+  # the current node 'next_node' becomes newly created node
+  # return list to check
+
+  def insert_at(value, idx)
+    current_node = @head
+    index = 0
+    until current_node.next_node.nil?
+      index += 1
+      if index == idx
+        to_insert = Node.new(value, current_node.next_node)
+        current_node.next_node = to_insert
+      end
+      current_node = current_node.next_node
+    end
+    self
   end
 end
 
 class Node
   attr_accessor :value, :next_node
 
-  def initialize(value)
-    @next_node = nil
+  def initialize(value, next_node=nil)
+    @next_node = next_node
     @value = value
   end
 end
@@ -138,8 +160,8 @@ my_list.prepend(43)
 p my_list
 
 p my_list.find(35)
+
+
+p my_list.insert_at(26, 3)
 p my_list.to_s
-
-
-p my_list
 
