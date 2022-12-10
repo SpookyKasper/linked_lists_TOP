@@ -115,27 +115,43 @@ class LinkedList
     string
   end
 
-  #insert_at(value, index) that inserts a new node with the provided value at the given index.
-
-  # Given a value and an index:
-  # go through the list until just before the given index selecting the current node
-  # the current node 'next' is passed as the next of the new node
-  # the current node 'next_node' becomes newly created node
-  # return list to check
-
   def insert_at(value, idx)
     current_node = @head
     index = 0
+    prepend(value) and return if idx == 0
     until current_node.next_node.nil?
-      index += 1
-      if index == idx
-        to_insert = Node.new(value, current_node.next_node)
-        current_node.next_node = to_insert
+      if index == idx - 1
+        my_node = Node.new(value, current_node.next_node)
+        current_node.next_node = my_node
+        return "#{value} was inserted at index #{idx}"
       end
+      index += 1
       current_node = current_node.next_node
     end
-    self
+    append(value)
   end
+
+  def remove_at(idx)
+    current_node = @head
+    index = 0
+    @head = current_node.next_node and return "#{current_node.value} was removed at index #{idx}" if idx == 0
+    until current_node.next_node.nil?
+      if index == idx - 1
+        value = current_node.next_node.value
+        p value
+        current_node.next_node = current_node.next_node.next_node
+        return "#{value} was removed at index #{idx}"
+      end
+      current_node = current_node.next_node
+      index += 1
+    end
+  end
+  # Pseudo code for remove_at
+  # Given a index remove the value at that index:
+  # go through the list until just before the wanted index
+  # the current_node next_node becomes the next_nodex.next_node
+  #
+
 end
 
 class Node
@@ -157,11 +173,14 @@ my_list.append(387)
 my_list.prepend(588)
 my_list.prepend(43)
 
-p my_list
-
-p my_list.find(35)
 
 
-p my_list.insert_at(26, 3)
+
+p my_list.to_s
+p my_list.insert_at(34, 1)
+p my_list.to_s
+p my_list.remove_at(2)
+p my_list.to_s
+p my_list.remove_at(0)
 p my_list.to_s
 
