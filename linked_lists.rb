@@ -103,6 +103,17 @@ class LinkedList
     end
     result
   end
+
+  def to_s
+    current_node = @head
+    string = ""
+    until current_node.next_node.nil?
+      string += "(#{current_node.value.to_s}) -> "
+      current_node = current_node.next_node
+    end
+    string += 'nil'
+    string
+  end
 end
 
 class Node
@@ -127,6 +138,8 @@ my_list.prepend(43)
 p my_list
 
 p my_list.find(35)
+p my_list.to_s
 
 
+p my_list
 
