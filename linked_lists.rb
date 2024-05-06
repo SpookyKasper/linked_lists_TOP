@@ -8,13 +8,8 @@ class LinkedList
 
   def append(value)
     entry = Node.new(value)
-    if @head.nil?
-      @head = entry
-      @tail = entry
-    else
-      @tail.next_node = entry
-      @tail = entry
-    end
+    @head.nil? ? @head = entry : @tail.next_node = entry
+    @tail = entry
   end
 
   def prepend(value)
@@ -71,16 +66,14 @@ class LinkedList
 
   def find(value)
     current = @head
-    result = nil
     idx = 0
     until current.next_node.nil?
-      if current.value == value
-        result = idx
-      end
+      return idx if current.value == value
+
       current = current.next_node
       idx += 1
     end
-    result
+    current.value == value ? idx : nil
   end
 
   def to_s
@@ -136,7 +129,6 @@ end
 
 
 my_list = LinkedList.new
-my_empty_list = LinkedList.new
 
 my_list.append(35)
 my_list.append(64)
@@ -144,6 +136,5 @@ my_list.append(387)
 my_list.prepend(588)
 my_list.prepend(43)
 
-puts my_list.size
-puts my_list
+puts my_list.find(387)
 puts my_list.contains(387)
