@@ -29,7 +29,7 @@ class LinkedList
   end
 
   def size
-    return 0 if self.head.nil?
+    return 0 if @head.nil?
 
     count = 1
     current_node = @head
@@ -40,11 +40,11 @@ class LinkedList
     count
   end
 
-  def at(idx)
+  def at(index)
     current_node = @head
-    until idx == 0
+    until index.zero?
       current_node = current_node.next_node
-      idx -= 1
+      index -= 1
     end
     current_node
   end
@@ -60,13 +60,13 @@ class LinkedList
   end
 
   def contains(value)
-    result = false
-    current = @head
-    until current.next_node.nil?
-      result = true if current.value == value
-      current = current.next_node
+    current_node = @head
+    until current_node.next_node.nil?
+      return true if current_node.value == value
+
+      current_node = current_node.next_node
     end
-    result
+    current_node.value == value
   end
 
   def find(value)
@@ -128,9 +128,9 @@ end
 class Node
   attr_accessor :value, :next_node
 
-  def initialize(value, next_node=nil)
-    @next_node = next_node
+  def initialize(value = nil, next_node = nil)
     @value = value
+    @next_node = next_node
   end
 end
 
@@ -144,14 +144,6 @@ my_list.append(387)
 my_list.prepend(588)
 my_list.prepend(43)
 
-
-
-
-p my_list.to_s
-p my_list.insert_at(34, 1)
-p my_list.to_s
-p my_list.remove_at(2)
-p my_list.to_s
-p my_list.remove_at(0)
-p my_list.to_s
-
+puts my_list.size
+puts my_list
+puts my_list.contains(387)
