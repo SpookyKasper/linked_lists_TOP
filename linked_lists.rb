@@ -80,10 +80,10 @@ class LinkedList
     current_node = @head
     string = ""
     until current_node.next_node.nil?
-      string += "(#{current_node.value.to_s}) -> "
+      string += "(#{current_node.value}) -> "
       current_node = current_node.next_node
     end
-    string += "(#{current_node.value.to_s}) -> nil"
+    string += "(#{current_node.value}) -> nil"
     string
   end
 
@@ -136,5 +136,8 @@ my_list.append(387)
 my_list.prepend(588)
 my_list.prepend(43)
 
-puts my_list.find(387)
+my_list.insert_at(12, 3)
+my_list.remove_at(3)
+puts my_list
+puts my_list.at(4).value
 puts my_list.contains(387)
